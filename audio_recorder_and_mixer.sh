@@ -21,9 +21,9 @@
 #############################################################
 # create a max record counter and a max count value
 max_count=0
-count_limit=15
-pan_L=.0
-pan_R=1.
+count_limit=10
+pan_L=0
+pan_R=10
 
 # master file
 master_audio=master.aiff
@@ -40,7 +40,7 @@ do
 
      
     # record 9 mins of audio
-    ffmpeg -y -f avfoundation -i ":0" -t 1 $output
+    ffmpeg -y -f avfoundation -i ":0" -t 420 $output
 
     # if first time recording master bounce to stereo channel
     # from the 8 channel saffire input
@@ -65,19 +65,19 @@ do
         ffmpeg -y -i new_audio.aiff -af "pan=stereo|c0<c0|c1<c0" new_audio_stereo.aiff
 
         # mix the stereo tracks together incrementing the pan to achieve a wide spread
-       ffmpeg -y -i master_copy.aiff -i new_audio_stereo.aiff -filter_complex "[0:a][1:a]amerge=inputs=2,pan=stereo|c0=c0+$pan_L*c2|c1=c1+$pan_R*c3[a]" -map "[a]" master.aiff
+       ffmpeg -y -i master_copy.aiff -i new_audio_stereo.aiff -filter_complex "[0:a][1:a]amerge=inputs=2,pan=stereo|c0=c0+0.$pan_L*c2|c1=c1+0.$pan_R*c3[a]" -map "[a]" master.aiff
         echo $pan_L
         echo $pan_R
-        
-        pan_L=$(echo "$pan_L+0.1" | bc)
-        pan_R=$(echo "$pan_R-0.1" | bc)
-        if [ $pan_L -ge 1.  ]
+        let "++pan_L"
+        let "--pan_R"
+
+        if [ $pan_L -ge 10 ]
         then
-            pan_L=.0
+            pan_L=0
         fi 
-        if [ $pan_R -le .0  ]
+        if [ $pan_R -lt 1 ]
         then
-            pan_R=1.
+            pan_R=10
         fi
 
         rm master_copy.aiff new_audio_stereo.aiff    
