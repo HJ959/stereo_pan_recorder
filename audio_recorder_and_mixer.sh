@@ -21,7 +21,7 @@
 #############################################################
 # create a max record counter and a max count value
 max_count=0
-count_limit=10
+count_limit=70
 pan_L=0
 pan_R=10
 
@@ -40,7 +40,7 @@ do
 
      
     # record 9 mins of audio
-    ffmpeg -y -f avfoundation -i ":0" -t 420 $output
+    ffmpeg -y -f avfoundation -i ":0" -t 400 $output
 
     # if first time recording master bounce to stereo channel
     # from the 8 channel saffire input
@@ -66,8 +66,7 @@ do
 
         # mix the stereo tracks together incrementing the pan to achieve a wide spread
        ffmpeg -y -i master_copy.aiff -i new_audio_stereo.aiff -filter_complex "[0:a][1:a]amerge=inputs=2,pan=stereo|c0=c0+0.$pan_L*c2|c1=c1+0.$pan_R*c3[a]" -map "[a]" master.aiff
-        echo $pan_L
-        echo $pan_R
+        
         let "++pan_L"
         let "--pan_R"
 
@@ -90,8 +89,10 @@ do
         break
     fi
 
-
-
-
+    echo "Pan left value $pan_L"
+    echo "Pan right value $pan_R"
+    echo "Number of iterations: $max_count limit $count_limit"
+    echo ""
 done
+rm new_audio.aiff
 #############################################################
