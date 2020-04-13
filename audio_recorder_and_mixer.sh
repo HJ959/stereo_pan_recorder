@@ -18,10 +18,12 @@
 # piece will be the collection of nights through different
 # windows in the house
 
+# tools you will need to run this script: FFMPEG, FFPROBE
 #############################################################
 # create a max record counter and a max count value
 max_count=0
-count_limit=70
+count_limit=10
+record_time=2
 pan_L=0
 pan_R=10
 
@@ -39,12 +41,14 @@ do
     fi
 
      
-    # record 9 mins of audio
-    ffmpeg -y -f avfoundation -i ":0" -t 400 $output
+    # record x mins of audio
+    ffmpeg -y -f avfoundation -i ":0" -t $record_time $output
 
     # if first time recording master bounce to stereo channel
     # from the 8 channel saffire input
-    if [ $max_count -lt 1  ]
+    num_channels=$(ffprobe -i master.aiff -show_entries stream=channels -select_streams a:0 -of compact=p=0:nk=1 -v 0)
+
+    if [ $max_count -lt 1  ] && [ $num_channels -gt 2 ]
     then
         cp master.aiff master_copy.aiff
         sleep 2
