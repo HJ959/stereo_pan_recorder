@@ -23,7 +23,7 @@
 # create a max record counter and a max count value
 max_count=0
 count_limit=10
-record_time=2
+record_time=423
 pan_L=0
 pan_R=10
 
