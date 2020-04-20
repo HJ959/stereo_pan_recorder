@@ -28,10 +28,10 @@ pan_L=0
 pan_R=10
 
 # master file
-master_audio=master.wav
-new_audio=new_audio.wav
-new_audio_copy=new_audio_copy.wav
-master_copy=master_copy.wav
+master_audio=/home/pi/stereo_pan_recorder/master.wav
+new_audio=/home/pi/stereo_pan_recorder/new_audio.wav
+new_audio_copy=/home/pi/stereo_pan_recorder/new_audio_copy.wav
+master_copy=/home/pi/stereo_pan_recorder/master_copy.wav
 
 for (( ; ; ))
 do
@@ -44,7 +44,7 @@ do
 
      
     # record x mins of audio
-    ffmpeg -f alsa -i default:CARD=K6 -t $record_time $output
+    ffmpeg -y -f alsa -ac 1 -ar 44100 -i default:CARD=K6 -t $record_time $output
 
     # if first time recording master bounce to stereo channel
     # from the 8 channel saffire input
@@ -85,7 +85,7 @@ do
             pan_R=10
         fi
 
-        rm $master_copy $new_audio_copy    
+        sudo rm $master_copy $new_audio_copy    
     fi
 
     # check that we're still within the record limit
@@ -100,5 +100,5 @@ do
     echo "Number of iterations: $max_count limit $count_limit"
     echo ""
 done
-rm $new_audio
+sudo rm $new_audio
 #############################################################
