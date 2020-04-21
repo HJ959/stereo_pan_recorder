@@ -100,5 +100,14 @@ do
     echo "Number of iterations: $max_count limit $count_limit"
     echo ""
 done
-sudo rm $new_audio
+now=$(date | cut -d " " -f 2)
+if [ $new_audio ]
+then
+    sudo rm $new_audio
+fi
+
+if [ $master_audio ] 
+then
+    cp $master_audio master_$now.wav
+fi
 #############################################################
