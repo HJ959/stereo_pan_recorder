@@ -23,9 +23,10 @@
 # create a max record counter and a max count value
 max_count=0
 count_limit=10
-record_time=423
+record_time=182
 pan_L=0
 pan_R=10
+start_delay=1
 
 # master file
 master_audio=master.aiff
@@ -38,6 +39,7 @@ do
         output="new_audio.aiff"
     else
         output="master.aiff"
+        sleep $start_delay
     fi
 
      
