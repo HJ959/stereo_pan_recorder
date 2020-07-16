@@ -23,15 +23,15 @@
 # create a max record counter and a max count value
 max_count=0
 count_limit=10
-record_time=423
+record_time=43
 pan_L=0
 pan_R=10
 
 # master file
-master_audio=/home/pi/stereo_pan_recorder/master.wav
-new_audio=/home/pi/stereo_pan_recorder/new_audio.wav
-new_audio_copy=/home/pi/stereo_pan_recorder/new_audio_copy.wav
-master_copy=/home/pi/stereo_pan_recorder/master_copy.wav
+master_audio=$(pwd)/master.wav
+new_audio=$(pwd)/new_audio.wav
+new_audio_copy=$(pwd)/new_audio_copy.wav
+master_copy=$(pwd)/master_copy.wav
 
 for (( ; ; ))
 do
