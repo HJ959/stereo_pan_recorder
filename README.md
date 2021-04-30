@@ -1,9 +1,9 @@
 # stereo_pan_recorder
-# Author: Henry James
-# Created: 09 04 2020
-# Website: https://henryjames.space
+## Author: Henry James
+## Created: 09 04 2020
+## Website: https://henryjames.space
 
-#############################################################
+
 This script will record audio from a microphone, after a 
 specified amount of input time it will compile the audio into 
 the master audio file. Each audio recording is bounced to the 
