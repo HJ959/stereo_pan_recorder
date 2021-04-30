@@ -4,17 +4,27 @@
 # Website: https://henryjames.space
 
 #############################################################
-# This script will record audio from a microphone
-# after 9.45 mins of audio has been recorded it
-# will compile the audio into the master audio file
-# each time it compiles to the master audio file
-# it will subtly incrememnt the pan so each iteration
-# of audio is in a different position covering the
-# space. Each audio file will have the correct gain
-# applied when being mixed with the master so to not
-# cause clipping after many hours of recording, the
-# script should be ran over night and the overall
-# piece will be the collection of nights through different
-# windows in the house
+This script will record audio from a microphone, after a 
+specified amount of input time it will compile the audio into 
+the master audio file. Each audio recording is bounced to the 
+master audio file but has the pan subtly increment so each 
+iteration of audio is in a different position covering the
+stereo field. 
+
+Each audio file will have the correct gain applied when 
+being mixed with the master so to not cause clipping after 
+many hours of recording. 
+
+Possible uses for the script include creating 'soundlapses'
+of environments in nature or recording musicians to create
+interesting sound pieces that seem to capture the bredth
+of a performance in a compressed time.
+
+I've been running this script on Mac OS with a focusrite 
+Saffire Pro 14 interface as well as creating a portable
+version with a raspberry pi powered by external power bank
+with the native instrument’s audio interface.
+Another cheap interface that's compatible with the Pi is 
+the Behringer U-Control.
 
 # tools you will need to run this script: FFMPEG, FFPROBE
